@@ -1,0 +1,27 @@
+{
+    "pregunta":[
+        "Lima es capital de Peru?",
+        "Peru es el centro del universo?",
+        "La reina Isabel 2 tenia hermana?",
+        "Eres o no eres?",
+        "Peru es goood?",
+        "Argentina ganara el mundial?",
+        "Soy guapo y lo se?",
+        "Pablito tenia un librito?",
+        "Ya no sabes que responder?",
+        "AEA?"
+    ],
+    "respuesta":[1,2,3,4,1,2,3,4,1,2],
+    "opciones":[
+        ["si","no","tal vez","pq no"],
+        ["si","no","tal vez","pq no"],
+        ["si","no","tal vez","pq no"],
+        ["si","no","tal vez","pq no"],
+        ["si","no","tal vez","pq no"],
+        ["si","no","tal vez","pq no"],
+        ["si","no","tal vez","pq no"],
+        ["si","no","tal vez","pq no"],
+        ["si","no","tal vez","pq no"],
+        ["si","no","tal vez","pq no"]
+    ]
+}
