@@ -1,78 +1,296 @@
-import tkinter
-from turtle import right
+from tkinter import *
 
-ventana=tkinter.Tk()
+raiz=Tk()
 
-miFrame=tkinter.Frame(ventana)
+miFrame=Frame(raiz)
+
 miFrame.pack()
 
-#------------------------pantalla--------------------------------
+operacion=""
 
-numeroPantalla=tkinter.StringVar()
+reset_pantalla=False
 
-pantalla=tkinter.Entry(miFrame,textvariable=numeroPantalla)
-pantalla.grid(row=1,column=1,padx=10,pady=10,columnspan=4)
-pantalla.config(bg="black",fg="white",justify="right")
+resultado=0
 
-#------------------------FuncionPantalla-------------------------
+
+#-------------pantalla---------------------------------------
+
+numeroPantalla=StringVar()
+
+pantalla=Entry(miFrame, textvariable=numeroPantalla)
+pantalla.grid(row=1, column=1, padx=10, pady=10, columnspan=4)
+pantalla.config(background="black", fg="#03f943", justify="right")
+
+
+#-------------------pulsaciones teclado--------------------------
 
 def numeroPulsado(num):
-    numeroPantalla.set(numeroPantalla.get()+num)
 
-#------------------------fila1--------------------------------
+	global operacion
 
-btn7=tkinter.Button(miFrame,text="7",width=3,command=lambda:numeroPulsado("7"))
-btn7.grid(row=2,column=1)
+	global reset_pantalla
 
-btn8=tkinter.Button(miFrame,text="8",width=3,command=lambda:numeroPulsado("8"))
-btn8.grid(row=2,column=2)
+	if reset_pantalla!=False:
 
-btn9=tkinter.Button(miFrame,text="9",width=3,command=lambda:numeroPulsado("9"))
-btn9.grid(row=2,column=3)
+		numeroPantalla.set(num)
 
-btnDiv=tkinter.Button(miFrame,text="/",width=3)
-btnDiv.grid(row=2,column=4)
+		reset_pantalla=False
 
-#------------------------fila2--------------------------------
+	else:
+	
+		numeroPantalla.set(numeroPantalla.get() + num)
 
-btn4=tkinter.Button(miFrame,text="4",width=3,command=lambda:numeroPulsado("4"))
-btn4.grid(row=3,column=1)
 
-btn5=tkinter.Button(miFrame,text="5",width=3,command=lambda:numeroPulsado("5"))
-btn5.grid(row=3,column=2)
+#----------------funcion suma----------------------------------
 
-btn6=tkinter.Button(miFrame,text="6",width=3,command=lambda:numeroPulsado("6"))
-btn6.grid(row=3,column=3)
+def suma(num):
 
-btnMult=tkinter.Button(miFrame,text="x",width=3)
-btnMult.grid(row=3,column=4)
+	global operacion
 
-#------------------------fila3--------------------------------
+	global resultado
 
-btn3=tkinter.Button(miFrame,text="3",width=3,command=lambda:numeroPulsado("3"))
-btn3.grid(row=4,column=1)
+	global reset_pantalla
 
-btn2=tkinter.Button(miFrame,text="2",width=3,command=lambda:numeroPulsado("2"))
-btn2.grid(row=4,column=2)
+	resultado+=int(num) #resultado=resultado+int(num)
 
-btn1=tkinter.Button(miFrame,text="1",width=3,command=lambda:numeroPulsado("1"))
-btn1.grid(row=4,column=3)
+	operacion="suma"
 
-btnRestar=tkinter.Button(miFrame,text="-",width=3)
-btnRestar.grid(row=4,column=4)
+	reset_pantalla=True
 
-#------------------------fila4--------------------------------
+	numeroPantalla.set(resultado)
 
-btn0=tkinter.Button(miFrame,text="0",width=3,command=lambda:numeroPulsado("0"))
-btn0.grid(row=5,column=1)
 
-btnComa=tkinter.Button(miFrame,text=",",width=3)
-btnComa.grid(row=5,column=2)
 
-btnIgual=tkinter.Button(miFrame,text="=",width=3)
-btnIgual.grid(row=5,column=3)
+#---------------funcion resta------------------------------
+num1=0
 
-btnSuma=tkinter.Button(miFrame,text="+",width=3)
-btnSuma.grid(row=5,column=4)
+contador_resta=0
 
-ventana.mainloop()
+def resta(num):
+
+	global operacion
+
+	global resultado
+
+	global num1
+
+	global contador_resta
+
+	global reset_pantalla
+
+	if contador_resta==0:
+
+		num1=int(num)
+
+		resultado=num1
+
+	else:
+
+		if contador_resta==1:
+
+			resultado=num1-int(num)
+
+		else:
+
+			resultado=int(resultado)-int(num)	
+
+		numeroPantalla.set(resultado)
+
+		resultado=numeroPantalla.get()
+
+
+	contador_resta=contador_resta+1
+
+	operacion="resta"
+
+	reset_pantalla=True
+
+
+#-------------funcion multiplicacion---------------------
+contador_multi=0
+
+def multiplica(num):
+
+	global operacion
+
+	global resultado
+
+	global num1
+
+	global contador_multi
+
+	global reset_pantalla
+	
+	if contador_multi==0:
+
+		num1=int(num)
+		
+		resultado=num1
+
+	else:
+
+		if contador_multi==1:
+
+			resultado=num1*int(num)
+
+		else:
+
+			resultado=int(resultado)*int(num)	
+
+		numeroPantalla.set(resultado)
+		
+		resultado=numeroPantalla.get()
+
+
+	contador_multi=contador_multi+1
+
+	operacion="multiplicacion"
+
+	reset_pantalla=True
+
+#-----------------funcion division---------------------
+
+contador_divi=0
+
+def divide(num):
+
+	global operacion
+
+	global resultado
+
+	global num1
+
+	global contador_divi
+
+	global reset_pantalla
+	
+	if contador_divi==0:
+
+		num1=float(num)
+		
+		resultado=num1
+
+	else:
+
+		if contador_divi==1:
+
+			resultado=num1/float(num)
+
+		else:
+
+			resultado=float(resultado)/float(num)	
+
+		numeroPantalla.set(resultado)
+		
+		resultado=numeroPantalla.get()
+
+
+	contador_divi=contador_divi+1
+
+	operacion="division"
+
+	reset_pantalla=True
+
+
+
+#----------------funcion el_resultado----------------
+
+def el_resultado():
+
+	global resultado
+
+	global operacion
+
+	global contador_resta
+
+	global contador_multi
+
+	global contador_divi
+	
+
+	if operacion=="suma":
+
+		numeroPantalla.set(resultado+int(numeroPantalla.get()))
+
+		resultado=0
+
+	elif operacion=="resta":
+
+		numeroPantalla.set(int(resultado)-int(numeroPantalla.get()))
+
+		resultado=0
+
+		contador_resta=0
+
+	elif operacion=="multiplicacion":
+
+		numeroPantalla.set(int(resultado)*int(numeroPantalla.get()))
+
+		resultado=0
+
+		contador_multi=0
+
+	elif operacion=="division":
+
+		numeroPantalla.set(int(resultado)/int(numeroPantalla.get()))
+
+		resultado=0
+
+		contador_divi=0
+
+	
+
+
+
+
+#-------------fila 1---------------------------------------------
+
+boton7=Button(miFrame, text="7", width=3, command=lambda:numeroPulsado("7"))
+boton7.grid(row=2, column=1)
+boton8=Button(miFrame, text="8", width=3, command=lambda:numeroPulsado("8"))
+boton8.grid(row=2, column=2)
+boton9=Button(miFrame, text="9", width=3, command=lambda:numeroPulsado("9"))
+boton9.grid(row=2, column=3)
+botonDiv=Button(miFrame, text="/", width=3, command=lambda:divide(numeroPantalla.get()))
+botonDiv.grid(row=2, column=4)
+
+
+#-------------fila 2---------------------------------------------
+
+boton4=Button(miFrame, text="4", width=3, command=lambda:numeroPulsado("4"))
+boton4.grid(row=3, column=1)
+boton5=Button(miFrame, text="5", width=3, command=lambda:numeroPulsado("5"))
+boton5.grid(row=3, column=2)
+boton6=Button(miFrame, text="6", width=3, command=lambda:numeroPulsado("6"))
+boton6.grid(row=3, column=3)
+botonMult=Button(miFrame, text="x", width=3, command=lambda:multiplica(numeroPantalla.get()))
+botonMult.grid(row=3, column=4)
+
+#-------------fila 3---------------------------------------------
+
+boton1=Button(miFrame, text="1", width=3, command=lambda:numeroPulsado("1"))
+boton1.grid(row=4, column=1)
+boton2=Button(miFrame, text="2", width=3, command=lambda:numeroPulsado("2"))
+boton2.grid(row=4, column=2)
+boton3=Button(miFrame, text="3", width=3, command=lambda:numeroPulsado("3"))
+boton3.grid(row=4, column=3)
+botonRest=Button(miFrame, text="-", width=3, command=lambda:resta(numeroPantalla.get()))
+botonRest.grid(row=4, column=4)
+
+
+#-------------fila 4---------------------------------------------
+
+boton0=Button(miFrame, text="0", width=3, command=lambda:numeroPulsado("0"))
+boton0.grid(row=5, column=1)
+botonComa=Button(miFrame, text=",", width=3, command=lambda:numeroPulsado("."))
+botonComa.grid(row=5, column=2)
+botonIgual=Button(miFrame, text="=", width=3, command=lambda:el_resultado())
+botonIgual.grid(row=5, column=3)
+botonSum=Button(miFrame, text="+", width=3, command=lambda:suma(numeroPantalla.get()))
+botonSum.grid(row=5, column=4)
+
+
+
+
+
+raiz.mainloop()
