@@ -77,9 +77,7 @@ class juego:
 ventana=tkinter.Tk()
 ventana.geometry("800x500")
 ventana.title("Practica TDP")
-imagen=PhotoImage(file="1.png")
-background=Label(image=imagen,text="Fondo")
-background.place(x=0,y=0,relwidth=1,relheight=1)
+
 
 with open('data.json','r') as f:
     data=json.load(f)
